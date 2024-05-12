@@ -45,6 +45,31 @@ app.post('/register', async (req, res) => {
     }
 })
 
+//This is Login Endpoint
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body
+
+    try {
+        const user = await User.findOne({ username })
+
+        if (!user) {
+            return res.status(404).send('User not found')
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password) 
+
+        if (!isMatch) {
+            return res.status(401).send('Invalid credentials')
+        }
+
+
+        const token = jwt.sign({ usernamme: user.username }, 'secret-key', { expiresIn: '1h' })
+        res.json({ token })
+    } catch (error) {
+        res.status(500).send('Login failed')
+    }
+})
+
 app.get('/', (req, res) => {
     res.send('Hello world! Test App and MongoDB')
 })
