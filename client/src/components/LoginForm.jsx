@@ -14,7 +14,7 @@ const LoginForm = () => {
     } catch (error) {
         alert('Login failed')
     }
-}
+  }
 
   return (
     <>

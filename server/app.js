@@ -3,9 +3,11 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 const app = express()
 const PORT = process.env.PORT || 3000;
 
+app.use(cors())
 app.use(bodyParser.json())
 
 const uri = 'mongodb+srv://ZwayneLars:Lars123@cluster0.iyswi2k.mongodb.net/'
